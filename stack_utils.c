@@ -28,6 +28,14 @@ void add_back(t_node **stack, t_node *new)
     tmp->next = new;
 }
 
+void add_front(t_node **stack, t_node *new_node)
+{
+    if (!stack || !new_node)
+        return;
+    new_node->next = *stack;
+    *stack = new_node;
+}
+
 int stack_size(t_node *stack)
 {
     int size;
@@ -51,4 +59,15 @@ void free_stack(t_node **stack)
         *stack = (*stack)->next;
         free(tmp);
     }
+}
+
+int is_sorted(t_node *stack)
+{
+    while (stack && stack->next)
+    {
+        if (stack->index > stack->next->index)
+            return 0;
+        stack = stack->next;
+    }
+    return 1; 
 }

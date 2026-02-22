@@ -41,3 +41,22 @@ void    rotate(t_node   **stack)
     last->next = first; 
 }
 
+void rev_rotate(t_node **stack)
+{
+    t_node *last;
+    t_node *prev;
+
+    if (!stack || !*stack || !(*stack)->next)
+        return;
+
+    prev = *stack;
+    while (prev->next->next)
+        prev = prev->next;
+
+    last = prev->next;       
+    prev->next = NULL;
+    last->next = *stack;     
+    *stack = last;
+}
+
+

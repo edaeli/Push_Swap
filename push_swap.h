@@ -20,6 +20,7 @@ void    free_stack(t_node **stack);
 void    swap(t_node **stack);
 void    push(t_node **src, t_node **dst);
 void    rotate(t_node **stack);
+void rev_rotate(t_node **stack);
 
 void    sa(t_node **a);
 void    sb(t_node **b);
@@ -32,9 +33,19 @@ void    ra(t_node **a);
 void    rb(t_node **b);
 void    rr(t_node **a, t_node **b);
 
+void rra(t_node **a);
+void rrb(t_node **b);
+void rrr(t_node **a, t_node **b);
+
 int     *stack_to_array(t_node *stack);
 void    sort_array(int *arr, int size);
 void    assign_index(t_node *stack, int *arr, int size);
 void    index_stack(t_node *stack);
+int is_sorted(t_node *stack);
+
+double  compute_disorder(t_node *a);
+
+void simple_sort(t_node **a, t_node **b);
+
 
 #endif
