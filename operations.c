@@ -17,7 +17,7 @@ void    swap(t_node **stack)
 void    push(t_node **src, t_node   **dst)
 {
     t_node  *tmp;
-    if(!src)
+    if(!src || !*src)
         return ;
     tmp = *src;
     *src = (*src)->next;
@@ -58,5 +58,24 @@ void rev_rotate(t_node **stack)
     last->next = *stack;     
     *stack = last;
 }
+
+void rotate_both(t_node **a, t_node **b, int *pos)
+{
+    while (*pos > 0)
+    {
+        rr(a, b);
+        (*pos)--;
+    }
+}
+
+void rev_rotate_both(t_node **a, t_node **b, int *pos)
+{
+    while (*pos > 0)
+    {
+        rrr(a, b);
+        (*pos)--;
+    }
+}
+
 
 

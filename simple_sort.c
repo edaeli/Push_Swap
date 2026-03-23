@@ -19,6 +19,31 @@ int find_min_pos(t_node *stack)
     return pos;
 }
 
+int	find_max_pos(t_node *stack)
+{
+	int	max;
+	int	pos;
+	int	i;
+
+	max = stack->index;
+	pos = 0;
+	i = 0;
+	while (stack)
+	{
+		if (stack->index > max)
+		{
+			max = stack->index;
+			pos = i;
+		}
+		stack = stack->next;
+		i++;
+	}
+	return (pos);
+}
+
+
+
+
 void simple_sort(t_node **a, t_node **b)
 {
     int min_pos;
@@ -26,8 +51,6 @@ void simple_sort(t_node **a, t_node **b)
     while (!is_sorted(*a))
     {
         min_pos = find_min_pos(*a);
-
-        // если минимальный элемент ближе к верху — ra, иначе rra
         if (min_pos <= stack_size(*a) / 2)
         {
             while (min_pos-- > 0)
