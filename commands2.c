@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_5.c                                           :+:      :+:    :+:   */
+/*   commands2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taslanya <taslanya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/24 20:42:27 by taslanya          #+#    #+#             */
-/*   Updated: 2026/03/24 20:42:28 by taslanya         ###   ########.fr       */
+/*   Created: 2026/03/24 14:28:22 by username          #+#    #+#             */
+/*   Updated: 2026/03/24 14:28:40 by taslanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_5(t_node **a, t_node **b)
+void	ra(t_node **a)
 {
-	int	min_pos;
+	rotate(a);
+	write(1, "ra\n", 3);
+	count_op("ra", 1);
+}
 
-	while (stack_size(*a) > 3)
-	{
-		min_pos = find_min_pos(*a);
-		if (min_pos <= stack_size(*a) / 2)
-		{
-			while (min_pos-- > 0)
-				ra(a);
-		}
-		else
-		{
-			min_pos = stack_size(*a) - min_pos;
-			while (min_pos-- > 0)
-				rra(a);
-		}
-		pb(a, b);
-	}
-	sort_3(a);
-	pa(a, b);
-	pa(a, b);
+void	rb(t_node **b)
+{
+	rotate(b);
+	write(1, "rb\n", 3);
+	count_op("rb", 1);
+}
+
+void	rr(t_node **a, t_node **b)
+{
+	rotate(a);
+	rotate(b);
+	write(1, "rr\n", 3);
+	count_op("rr", 1);
 }

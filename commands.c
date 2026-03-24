@@ -1,59 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   commands.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taslanya <taslanya@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/24 14:27:41 by username          #+#    #+#             */
+/*   Updated: 2026/03/24 14:28:17 by taslanya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void sa(t_node **a)
+void	sa(t_node **a)
 {
-    swap(a);
-    write(1, "sa\n", 3);
-    count_op("sa", 1);
+	swap(a);
+	write(1, "sa\n", 3);
+	count_op("sa", 1);
 }
 
-void sb(t_node **b)
+void	sb(t_node **b)
 {
-    swap(b);
-    write(1, "sb\n", 3);
-    count_op("sb", 1);
+	swap(b);
+	write(1, "sb\n", 3);
+	count_op("sb", 1);
 }
 
-void ss(t_node **a, t_node **b)
+void	ss(t_node **a, t_node **b)
 {
-    swap(a);
-    swap(b);
-    write(1, "ss\n", 3);
-    count_op("ss", 1);
+	swap(a);
+	swap(b);
+	write(1, "ss\n", 3);
+	count_op("ss", 1);
 }
 
-void pa(t_node **a, t_node **b)
+void	pa(t_node **a, t_node **b)
 {
-    push(b, a);
-    write(1, "pa\n", 3);
-    count_op("pa", 1);
+	push(b, a);
+	write(1, "pa\n", 3);
+	count_op("pa", 1);
 }
 
-void pb(t_node **a, t_node **b)
+void	pb(t_node **a, t_node **b)
 {
-    push(a, b);
-    write(1, "pb\n", 3);
-    count_op("pb", 1);
-}
-
-void ra(t_node **a)
-{
-    rotate(a);
-    write(1, "ra\n", 3);
-    count_op("ra", 1);
-}
-
-void rb(t_node **b)
-{
-    rotate(b);
-    write(1, "rb\n", 3);
-    count_op("rb", 1);
-}
-
-void rr(t_node **a, t_node **b)
-{
-    rotate(a);
-    rotate(b);
-    write(1, "rr\n", 3);
-    count_op("rr", 1);
+	push(a, b);
+	write(1, "pb\n", 3);
+	count_op("pb", 1);
 }

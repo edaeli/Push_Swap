@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_5.c                                           :+:      :+:    :+:   */
+/*   operations2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taslanya <taslanya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/24 20:42:27 by taslanya          #+#    #+#             */
-/*   Updated: 2026/03/24 20:42:28 by taslanya         ###   ########.fr       */
+/*   Created: 2026/03/24 21:00:33 by taslanya          #+#    #+#             */
+/*   Updated: 2026/03/24 21:00:42 by taslanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_5(t_node **a, t_node **b)
+void	rev_rotate_both(t_node **a, t_node **b, int *pos)
 {
-	int	min_pos;
-
-	while (stack_size(*a) > 3)
+	while (*pos > 0)
 	{
-		min_pos = find_min_pos(*a);
-		if (min_pos <= stack_size(*a) / 2)
-		{
-			while (min_pos-- > 0)
-				ra(a);
-		}
-		else
-		{
-			min_pos = stack_size(*a) - min_pos;
-			while (min_pos-- > 0)
-				rra(a);
-		}
-		pb(a, b);
+		rrr(a, b);
+		(*pos)--;
 	}
-	sort_3(a);
-	pa(a, b);
-	pa(a, b);
 }

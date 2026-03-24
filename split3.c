@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_5.c                                           :+:      :+:    :+:   */
+/*   split3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taslanya <taslanya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/24 20:42:27 by taslanya          #+#    #+#             */
-/*   Updated: 2026/03/24 20:42:28 by taslanya         ###   ########.fr       */
+/*   Created: 2026/03/24 20:53:13 by taslanya          #+#    #+#             */
+/*   Updated: 2026/03/24 20:53:22 by taslanya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_5(t_node **a, t_node **b)
+void	free_split(char **arr)
 {
-	int	min_pos;
+	int	i;
 
-	while (stack_size(*a) > 3)
+	i = 0;
+	if (!arr)
+		return ;
+	while (arr[i])
 	{
-		min_pos = find_min_pos(*a);
-		if (min_pos <= stack_size(*a) / 2)
-		{
-			while (min_pos-- > 0)
-				ra(a);
-		}
-		else
-		{
-			min_pos = stack_size(*a) - min_pos;
-			while (min_pos-- > 0)
-				rra(a);
-		}
-		pb(a, b);
+		free(arr[i]);
+		i++;
 	}
-	sort_3(a);
-	pa(a, b);
-	pa(a, b);
+	free(arr);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
