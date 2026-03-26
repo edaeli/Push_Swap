@@ -6,26 +6,25 @@
 /*   By: taslanya <taslanya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 20:39:16 by taslanya          #+#    #+#             */
-/*   Updated: 2026/03/26 18:00:38 by khoayvaz         ###   ########.fr       */
+/*   Updated: 2026/03/26 18:24:38 by khoayvaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "push_swap.h"
 
 int	find_min_pos(t_node *stack)
 {
-	int	min_index;
+	int	min_idx;
 	int	pos;
 	int	i;
 
-	min_index = stack->index;
+	min_idx = stack->index;
 	pos = 0;
 	i = 0;
 	while (stack)
 	{
-		if (stack->index < min_index)
+		if (stack->index < min_idx)
 		{
-			min_index = stack->index;
+			min_idx = stack->index;
 			pos = i;
 		}
 		stack = stack->next;
@@ -36,18 +35,18 @@ int	find_min_pos(t_node *stack)
 
 int	find_max_pos(t_node *stack)
 {
-	int	max_index;
+	int	max_idx;
 	int	pos;
 	int	i;
 
-	max_index = stack->index;
+	max_idx = stack->index;
 	pos = 0;
 	i = 0;
 	while (stack)
 	{
-		if (stack->index > max_index)
+		if (stack->index > max_idx)
 		{
-			max_index = stack->index;
+			max_idx = stack->index;
 			pos = i;
 		}
 		stack = stack->next;
@@ -58,26 +57,27 @@ int	find_max_pos(t_node *stack)
 
 void	simple_sort(t_node **a, t_node **b)
 {
-	int	min_pos;
+	int	pos;
 	int	size;
 
-	while (!is_sorted(*a))
+	while (stack_size(*a) > 3 && !is_sorted(*a))
 	{
 		size = stack_size(*a);
-		min_pos = find_min_pos(*a);
-		if (min_pos <= size / 2)
+		pos = find_min_pos(*a);
+		if (pos <= size / 2)
 		{
-			while (min_pos-- > 0)
+			while (pos-- > 0)
 				ra(a);
 		}
 		else
 		{
-			min_pos = size - min_pos;
-			while (min_pos-- > 0)
+			pos = size - pos;
+			while (pos-- > 0)
 				rra(a);
 		}
 		pb(a, b);
 	}
+	sort_3(a);
 	while (*b)
 		pa(a, b);
 }
