@@ -6,7 +6,7 @@
 /*   By: taslanya <taslanya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 20:06:29 by taslanya          #+#    #+#             */
-/*   Updated: 2026/03/24 20:57:40 by taslanya         ###   ########.fr       */
+/*   Updated: 2026/03/26 17:26:56 by khoayvaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,45 +41,54 @@ void	push_chunks_greedy(t_node **a, t_node **b, int chunk)
 	}
 }
 
-int	get_target_pos(t_node *a, int index)
+static int	get_min_pos_idx(t_node *a)
 {
 	t_node	*tmp;
 	int		pos;
 	int		best_pos;
-	int		min_diff;
-	int		diff;
+	int		min_val;
 
 	tmp = a;
 	pos = 0;
 	best_pos = 0;
-	min_diff = INT_MAX;
+	min_val = INT_MAX;
 	while (tmp)
 	{
-		diff = tmp->index - index;
-		if (diff > 0 && diff < min_diff)
+		if (tmp->index < min_val)
 		{
-			min_diff = diff;
-			best_pos = pos;
-		}
-		tmp = tmp->next;
-		pos++;
-	}
-	if (min_diff != INT_MAX)
-		return (best_pos);
-	tmp = a;
-	pos = 0;
-	min_diff = INT_MAX;
-	while (tmp)
-	{
-		if (tmp->index < min_diff)
-		{
-			min_diff = tmp->index;
+			min_val = tmp->index;
 			best_pos = pos;
 		}
 		tmp = tmp->next;
 		pos++;
 	}
 	return (best_pos);
+}
+
+int	get_target_pos(t_node *a, int index)
+{
+	t_node	*tmp;
+	int		pos;
+	int		best_pos;
+	int		min_diff;
+
+	tmp = a;
+	pos = 0;
+	best_pos = -1;
+	min_diff = INT_MAX;
+	while (tmp)
+	{
+		if (tmp->index > index && tmp->index - index < min_diff)
+		{
+			min_diff = tmp->index - index;
+			best_pos = pos;
+		}
+		tmp = tmp->next;
+		pos++;
+	}
+	if (best_pos != -1)
+		return (best_pos);
+	return (get_min_pos_idx(a));
 }
 
 int	get_pos(t_node *stack, int index)
@@ -97,8 +106,7 @@ int	get_pos(t_node *stack, int index)
 	return (-1);
 }
 
-void	get_cost(t_node *a, t_node *b, int *cost_a,
-		int *cost_b, int index)
+void	get_cost(t_node *a, t_node *b, int cost[2], int index)
 {
 	int	size_a;
 	int	size_b;
@@ -110,28 +118,11 @@ void	get_cost(t_node *a, t_node *b, int *cost_a,
 	pos_b = get_pos(b, index);
 	pos_a = get_target_pos(a, index);
 	if (pos_b <= size_b / 2)
-		*cost_b = pos_b;
+		cost[1] = pos_b;
 	else
-		*cost_b = pos_b - size_b;
+		cost[1] = pos_b - size_b;
 	if (pos_a <= size_a / 2)
-		*cost_a = pos_a;
+		cost[0] = pos_a;
 	else
-		*cost_a = pos_a - size_a;
-}
-
-void	do_rotate(t_node **a, t_node **b,
-		int *cost_a, int *cost_b)
-{
-	while (*cost_a > 0 && *cost_b > 0)
-	{
-		rr(a, b);
-		(*cost_a)--;
-		(*cost_b)--;
-	}
-	while (*cost_a < 0 && *cost_b < 0)
-	{
-		rrr(a, b);
-		(*cost_a)++;
-		(*cost_b)++;
-	}
+		cost[0] = pos_a - size_a;
 }

@@ -6,7 +6,7 @@
 /*   By: taslanya <taslanya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 20:03:02 by taslanya          #+#    #+#             */
-/*   Updated: 2026/03/24 20:03:03 by taslanya         ###   ########.fr       */
+/*   Updated: 2026/03/26 17:39:00 by khoayvaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,14 @@ void	push_back_to_a(t_node **a, t_node **b)
 		max_pos = find_max_pos(*b);
 		if (max_pos <= size / 2)
 		{
-			while (max_pos > 0)
-			{
+			while (max_pos-- > 0)
 				rb(b);
-				max_pos--;
-			}
 		}
 		else
 		{
 			max_pos = size - max_pos;
-			while (max_pos > 0)
-			{
+			while (max_pos-- > 0)
 				rrb(b);
-				max_pos--;
-			}
 		}
 		pa(a, b);
 	}
@@ -77,9 +71,8 @@ void	chunk_sort(t_node **a, t_node **b)
 	int	chunk;
 
 	size = stack_size(*a);
-	if (size <= 100)
-		chunk = 25;
-	else
+	chunk = 25;
+	if (size > 100)
 		chunk = 60;
 	push_chunks_medium(a, b, chunk);
 	push_back_to_a(a, b);

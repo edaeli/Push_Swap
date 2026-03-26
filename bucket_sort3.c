@@ -6,7 +6,7 @@
 /*   By: taslanya <taslanya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 20:57:44 by taslanya          #+#    #+#             */
-/*   Updated: 2026/03/24 20:57:59 by taslanya         ###   ########.fr       */
+/*   Updated: 2026/03/26 17:34:29 by khoayvaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,48 +43,42 @@ void	finish_rotate_b(t_node **b, int cost_b)
 int	get_cheapest(t_node *a, t_node *b)
 {
 	t_node	*tmp;
-	int		best_index;
+	int		best_idx;
 	int		best_cost;
-	int		cost_a;
-	int		cost_b;
-	int		total;
+	int		cost[2];
 
 	tmp = b;
-	best_index = tmp->index;
+	best_idx = tmp->index;
 	best_cost = INT_MAX;
 	while (tmp)
 	{
-		get_cost(a, b, &cost_a, &cost_b, tmp->index);
-		total = cost_a;
-		if (total < 0)
-			total = -total;
-		if (cost_b < 0)
-			total += -cost_b;
-		else
-			total += cost_b;
-		if (total < best_cost)
+		get_cost(a, b, cost, tmp->index);
+		if (cost[0] < 0)
+			cost[0] = -cost[0];
+		if (cost[1] < 0)
+			cost[1] = -cost[1];
+		if (cost[0] + cost[1] < best_cost)
 		{
-			best_cost = total;
-			best_index = tmp->index;
+			best_cost = cost[0] + cost[1];
+			best_idx = tmp->index;
 		}
 		tmp = tmp->next;
 	}
-	return (best_index);
+	return (best_idx);
 }
 
 void	greedy_push_back(t_node **a, t_node **b)
 {
 	int	index;
-	int	cost_a;
-	int	cost_b;
+	int	cost[2];
 
 	while (*b)
 	{
 		index = get_cheapest(*a, *b);
-		get_cost(*a, *b, &cost_a, &cost_b, index);
-		do_rotate(a, b, &cost_a, &cost_b);
-		finish_rotate_a(a, cost_a);
-		finish_rotate_b(b, cost_b);
+		get_cost(*a, *b, cost, index);
+		do_rotate(a, b, &cost[0], &cost[1]);
+		finish_rotate_a(a, cost[0]);
+		finish_rotate_b(b, cost[1]);
 		pa(a, b);
 	}
 }
@@ -95,9 +89,8 @@ void	greedy_sort(t_node **a, t_node **b)
 	int	chunk;
 
 	size = stack_size(*a);
-	if (size <= 100)
-		chunk = 25;
-	else
+	chunk = 25;
+	if (size > 100)
 		chunk = 60;
 	push_chunks_greedy(a, b, chunk);
 	greedy_push_back(a, b);
