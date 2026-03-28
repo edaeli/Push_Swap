@@ -6,7 +6,7 @@
 /*   By: taslanya <taslanya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 20:55:24 by taslanya          #+#    #+#             */
-/*   Updated: 2026/03/26 18:04:46 by khoayvaz         ###   ########.fr       */
+/*   Updated: 2026/03/28 12:36:32 by khoayvaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int	is_sorted(t_node *stack)
 {
-	while (stack && stack->next)
+	if (!stack)
+		return (1);
+	while (stack->next)
 	{
-		if (stack->index > stack->next->index)
+		if (stack->value > stack->next->value)
 			return (0);
 		stack = stack->next;
 	}
